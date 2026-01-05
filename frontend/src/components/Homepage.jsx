@@ -1,270 +1,71 @@
-import React from 'react';
-<<<<<<< HEAD
+import React, { useState } from "react";
+import "../styles/Homepage.css";
+import StudyResources from "./StudyResources"; // Import the StudyResources component
+import Dashboard from "./Dashboard"; // Import the new Dashboard component
+import TrackProgress from "./TrackProgress"; // Import the TrackProgress component
+import MockExam from "./MockExam"; // Import the MockExam component
+
 
 export default function Homepage() {
-  const styles = {
-    container: {
-      minHeight: '100vh',
-      backgroundColor: '#f9fafb',
-      fontFamily: 'Arial, sans-serif'
-    },
-    header: {
-      background: 'linear-gradient(to right, #2563eb, #1d4ed8)',
-      color: 'white',
-      padding: '2rem',
-      boxShadow: '0 4px 6px rgba(0,0,0,0.1)'
-    },
-    headerContent: {
-      maxWidth: '1280px',
-      margin: '0 auto'
-    },
-    headerTitle: {
-      display: 'flex',
-      alignItems: 'center',
-      gap: '12px',
-      marginBottom: '8px'
-    },
-    h1: {
-      fontSize: '2rem',
-      fontWeight: 'bold',
-      margin: 0
-    },
-    subtitle: {
-      color: '#bfdbfe',
-      marginLeft: '56px'
-    },
-    main: {
-      maxWidth: '1280px',
-      margin: '0 auto',
-      padding: '1.5rem'
-    },
-    navTabs: {
-      display: 'flex',
-      gap: '1rem',
-      marginBottom: '2rem',
-      flexWrap: 'wrap'
-    },
-    buttonActive: {
-      backgroundColor: '#2563eb',
-      color: 'white',
-      padding: '12px 24px',
-      borderRadius: '8px',
-      border: 'none',
-      fontWeight: '500',
-      cursor: 'pointer',
-      boxShadow: '0 2px 4px rgba(0,0,0,0.1)',
-      transition: 'all 0.3s'
-    },
-    buttonInactive: {
-      backgroundColor: 'white',
-      color: '#2563eb',
-      padding: '12px 24px',
-      borderRadius: '8px',
-      border: '2px solid #2563eb',
-      fontWeight: '500',
-      cursor: 'pointer',
-      transition: 'all 0.3s'
-    },
-    welcomeSection: {
-      backgroundColor: 'white',
-      border: '2px solid #bfdbfe',
-      borderRadius: '12px',
-      padding: '2rem',
-      marginBottom: '2rem',
-      boxShadow: '0 1px 3px rgba(0,0,0,0.05)'
-    },
-    welcomeTitle: {
-      fontSize: '1.5rem',
-      fontWeight: 'bold',
-      color: '#2563eb',
-      marginBottom: '8px',
-      display: 'flex',
-      alignItems: 'center',
-      gap: '8px'
-    },
-    welcomeText: {
-      color: '#6b7280',
-      marginBottom: '1.5rem'
-    },
-    statsGrid: {
-      display: 'grid',
-      gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
-      gap: '1.5rem'
-    },
-    statCard: {
-      border: '2px solid #bfdbfe',
-      borderRadius: '8px',
-      padding: '1.5rem',
-      textAlign: 'center',
-      transition: 'all 0.3s',
-      cursor: 'pointer'
-    },
-    statNumber: {
-      fontSize: '3rem',
-      fontWeight: 'bold',
-      color: '#2563eb',
-      marginBottom: '8px'
-    },
-    statLabel: {
-      color: '#6b7280',
-      fontWeight: '500'
-    },
-    progressSection: {
-      backgroundColor: 'white',
-      border: '2px solid #bfdbfe',
-      borderRadius: '12px',
-      padding: '2rem',
-      boxShadow: '0 1px 3px rgba(0,0,0,0.05)'
-    },
-    progressTitle: {
-      fontSize: '1.5rem',
-      fontWeight: 'bold',
-      color: '#1f2937',
-      marginBottom: '1.5rem'
-    },
-    progressBarContainer: {
-      width: '100%',
-      backgroundColor: '#e5e7eb',
-      borderRadius: '9999px',
-      height: '32px',
-      overflow: 'hidden',
-      position: 'relative'
-    },
-    progressBarFill: {
-      background: 'linear-gradient(to right, #2563eb, #3b82f6)',
-      height: '100%',
-      width: '65%',
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'center',
-      color: 'white',
-      fontWeight: '600',
-      fontSize: '0.875rem'
-    },
-    progressText: {
-      color: '#6b7280',
-      marginTop: '1rem'
-    }
-  };
+  const [currentPage, setCurrentPage] = useState("home");
 
-  return (
-    <div style={styles.container}>
-      {/* Header */}
-      <header style={styles.header}>
-        <div style={styles.headerContent}>
-          <div style={styles.headerTitle}>
-            <span style={{ fontSize: '2.5rem' }}>🎓</span>
-            <h1 style={styles.h1}>Brain2Bureau - Loksewa Prep</h1>
-          </div>
-          <p style={styles.subtitle}>Your Complete Preparation Companion</p>
-=======
-import { useNavigate } from 'react-router-dom';
-import '../styles/Homepage.css';
+  const handleNavigation = (page) => setCurrentPage(page);
 
-export default function Homepage() {
-  const navigate = useNavigate();
+  // Render different pages
+  if (currentPage === "dashboard") {
+  return <Dashboard onNavigate={setCurrentPage} />;
+}
+  if (currentPage === "study-resources") {
+   
+      return <StudyResources onNavigate={setCurrentPage} />;
+    
+  }
+  if (currentPage === "mock-exams") {
+    return <MockExam onNavigate={setCurrentPage} />
+  }
+  if (currentPage === "track-progress") {
+    return <TrackProgress onNavigate={setCurrentPage} />;
+  }
 
-  const handleNavigation = (path) => {
-    navigate(path);
-  };
-
+  // Home page JSX
   return (
     <div className="homepage-container">
       {/* Header */}
       <header className="header">
         <div className="header-content">
-          <div className="logo-icon">
-            <span>🎓</span>
-          </div>
+          <div className="logo-icon">🎓</div>
           <div className="header-text">
             <h1>Brain2Bureau - Loksewa Prep</h1>
             <p>Your Complete Preparation Companion</p>
           </div>
->>>>>>> upstream/master
         </div>
       </header>
 
       {/* Main Content */}
-<<<<<<< HEAD
-      <main style={styles.main}>
-        {/* Navigation Tabs */}
-        <div style={styles.navTabs}>
-          <button style={styles.buttonActive}>Dashboard</button>
-          <button style={styles.buttonInactive}>Study Resources</button>
-          <button style={styles.buttonInactive}>Mock Exams</button>
-          <button style={styles.buttonInactive}>Track Progress</button>
-        </div>
-
-        {/* Welcome Section */}
-        <div style={styles.welcomeSection}>
-          <h2 style={styles.welcomeTitle}>
-            Welcome Back! <span style={{ fontSize: '2rem' }}>👋</span>
-          </h2>
-          <p style={styles.welcomeText}>Continue your Loksewa preparation journey</p>
-
-          {/* Stats Grid */}
-          <div style={styles.statsGrid}>
-            <div style={styles.statCard}>
-              <div style={styles.statNumber}>8</div>
-              <div style={styles.statLabel}>Resources Read</div>
-            </div>
-            
-            <div style={styles.statCard}>
-              <div style={styles.statNumber}>5</div>
-              <div style={styles.statLabel}>Exams Taken</div>
-            </div>
-            
-            <div style={styles.statCard}>
-              <div style={styles.statNumber}>78%</div>
-              <div style={styles.statLabel}>Average Score</div>
-            </div>
-            
-            <div style={styles.statCard}>
-              <div style={styles.statNumber}>15</div>
-              <div style={styles.statLabel}>Study Days</div>
-            </div>
-          </div>
-        </div>
-
-        {/* Progress Section */}
-        <div style={styles.progressSection}>
-          <h2 style={styles.progressTitle}>Overall Progress</h2>
-          
-          {/* Progress Bar */}
-          <div style={styles.progressBarContainer}>
-            <div style={styles.progressBarFill}>
-              65% Complete
-            </div>
-          </div>
-          
-          <p style={styles.progressText}>Keep going! You're making great progress.</p>
-        </div>
-      </main>
-=======
       <div className="main-content">
         {/* Navigation Buttons */}
         <div className="nav-buttons">
-          <button 
-            className="nav-btn nav-btn-primary"
-            onClick={() => handleNavigation('/dashboard')}
+          <button
+            className="nav-btn"
+            onClick={() => handleNavigation("dashboard")}
           >
             Dashboard
           </button>
-          <button 
-            className="nav-btn nav-btn-secondary"
-            onClick={() => handleNavigation('/study-resources')}
+          <button
+            className="nav-btn"
+            onClick={() => handleNavigation("study-resources")}
           >
             Study Resources
           </button>
-          <button 
-            className="nav-btn nav-btn-secondary"
-            onClick={() => handleNavigation('/mock-exams')}
+          <button
+            className="nav-btn"
+            onClick={() => handleNavigation("mock-exams")}
           >
             Mock Exams
           </button>
-          <button 
-            className="nav-btn nav-btn-secondary"
-            onClick={() => handleNavigation('/track-progress')}
+          <button
+            className="nav-btn"
+            onClick={() => handleNavigation("track-progress")}
           >
             Track Progress
           </button>
@@ -272,32 +73,26 @@ export default function Homepage() {
 
         {/* Welcome Card */}
         <div className="welcome-card">
-          <h2 className="welcome-title">Welcome Back! 👋</h2>
-          <p className="welcome-subtitle">Continue your Loksewa preparation journey</p>
+          <h2>Welcome Back! 👋</h2>
+          <p>Continue your Loksewa preparation journey</p>
 
           {/* Stats Cards */}
           <div className="stats-container">
-            {/* Resources Read */}
-            <div className="stat-card">
+            <div className="stat-card resources">
               <div className="stat-number">8</div>
               <div className="stat-label">Resources Read</div>
             </div>
-
-            {/* Exams Taken */}
-            <div className="stat-card">
+            <div className="stat-card exams">
               <div className="stat-number">5</div>
               <div className="stat-label">Exams Taken</div>
             </div>
-
-            {/* Average Score */}
-            <div className="stat-card">
-              <div className="stat-number stat-number-large">78%</div>
+            <div className="stat-card score">
+              <div className="stat-number">78%</div>
               <div className="stat-label">Average Score</div>
             </div>
           </div>
         </div>
       </div>
->>>>>>> upstream/master
     </div>
   );
 }
