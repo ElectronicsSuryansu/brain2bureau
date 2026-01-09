@@ -1,0 +1,36 @@
+/* MyAccount.css */
+.myaccount-container { padding: 20px; display:flex; justify-content:center; }
+.myaccount-card { width:100%; max-width:980px; background:var(--card-bg); border-radius:12px; box-shadow:0 12px 40px rgba(16,24,40,0.06); padding:20px; }
+.myaccount-header { display:flex; gap:16px; align-items:center; border-bottom:1px solid var(--border-color); padding-bottom:16px; }
+.myaccount-avatar { display:flex; gap:12px; align-items:center; }
+.avatar-preview { width:112px; height:112px; border-radius:14px; background: linear-gradient(135deg,#667eea,#764ba2); display:flex; align-items:center; justify-content:center; color:white; font-weight:800; font-size:26px; background-size:cover; background-position:center; box-shadow: 0 8px 20px rgba(15,23,42,0.06); }
+.myaccount-info h2 { margin:0; font-size:1.35rem; }
+.myaccount-info .muted { color:var(--text-secondary); font-size:0.95rem; }
+.myaccount-stats { display:grid; grid-template-columns: repeat(4,1fr); gap:12px; padding:12px 0; }
+.stat { background: rgba(0,0,0,0.02); padding:10px; border-radius:10px; text-align:center; }
+.stat-number { font-weight:800; font-size:1.12rem; }
+.stat-label { font-size:0.85rem; color:var(--text-secondary); }
+.myaccount-sections { display:grid; grid-template-columns: 1fr 320px; gap:16px; margin-top:12px; }
+.footer-card { font-size:0.95rem; color:var(--text-secondary); }
+.small-button { padding:8px 10px; border-radius:8px; background:transparent; border:1px solid var(--border-color); cursor:pointer; }
+.back-button { padding:8px 12px; border-radius:8px; background:transparent; border:1px solid var(--border-color); cursor:pointer; font-weight:700; }
+.section { background:var(--card-bg); padding:12px; border-radius:10px; border:1px solid var(--border-color); }
+.perf-row { display:flex; gap:16px; }
+.recent-list { display:flex; flex-direction:column; gap:8px; }
+.exam-row { display:flex; justify-content:space-between; gap:12px; align-items:center; }
+.settings-row { display:flex; justify-content:space-between; align-items:center; padding:8px 0; }
+.small-button { padding:6px 8px; border-radius:8px; background:transparent; border:1px solid var(--border-color); cursor:pointer; }
+
+.edit-row { display:flex; gap:8px; align-items:center; margin-top:8px; flex-wrap:wrap; }
+.field-input { padding:8px 10px; border-radius:8px; border:1px solid var(--border-color); min-width:140px; }
+.rank-pill { font-size:12px; color:#6b7280; padding:6px 10px; border-radius:999px; background: rgba(0,0,0,0.03); }
+.badge { padding: 4px 8px; border-radius: 12px; font-weight:700; font-size:12px; }
+.badge-weak { background: #fee2e2; color: #9f1b1b; }
+.badge-strong { background: #d1fae5; color: #065f46; }
+.actions { display:flex; gap:12px; flex-direction:column; }
+.actions .danger { background:#ef4444; color:white; padding:10px; border-radius:8px; border:none; cursor:pointer; }
+.muted { color:var(--text-secondary); font-size:0.9rem; margin-top:8px; }
+
+.back-button { padding:8px 12px; border-radius:8px; background:transparent; border:1px solid var(--border-color); cursor:pointer; font-weight:700; }
+
+@media (max-width:900px) { .myaccount-sections { grid-template-columns: 1fr; } .myaccount-stats { grid-template-columns: repeat(2, 1fr); } }

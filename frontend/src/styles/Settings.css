@@ -1,0 +1,15 @@
+/* Settings.css */
+.settings-container { padding:20px; display:flex; justify-content:center; }
+.settings-card { width:100%; max-width:980px; background:var(--card-bg); border-radius:12px; padding:18px; border:1px solid var(--border-color); }
+.settings-grid { display:grid; grid-template-columns: 1fr 1fr; gap:12px; }
+.settings-section { background:var(--card-bg); padding:12px; border-radius:8px; border:1px solid var(--border-color); }
+.row { padding:8px 0; display:flex; justify-content:space-between; align-items:center; }
+.devices-list { display:flex; flex-direction:column; gap:8px; }
+.device-row { display:flex; justify-content:space-between; gap:12px; align-items:center; }
+.small-button { padding:6px 8px; border-radius:8px; background:transparent; border:1px solid var(--border-color); cursor:pointer; }
+.danger { background:#ef4444; color:#fff; padding:8px 12px; border-radius:8px; border:none; }
+.small-muted { font-size:0.9rem; color:var(--text-secondary); }
+
+.back-button { padding:8px 12px; border-radius:8px; background:transparent; border:1px solid var(--border-color); cursor:pointer; font-weight:700; }
+
+@media (max-width:920px) { .settings-grid { grid-template-columns: 1fr; } }

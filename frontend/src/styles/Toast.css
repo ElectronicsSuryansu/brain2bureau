@@ -1,0 +1,22 @@
+.toast-root {
+  position: fixed;
+  right: 20px;
+  bottom: 24px;
+  z-index: 9999;
+}
+
+.toast-card {
+  background: linear-gradient(90deg, rgba(2,132,199,1), rgba(59,130,246,1));
+  color: white;
+  padding: 10px 14px;
+  border-radius: 10px;
+  box-shadow: 0 10px 30px rgba(2,6,23,0.2);
+  font-weight: 700;
+  transform-origin: bottom right;
+  animation: toastIn 320ms ease;
+}
+
+@keyframes toastIn {
+  from { transform: translateY(8px) scale(0.98); opacity: 0; }
+  to { transform: translateY(0) scale(1); opacity: 1; }
+}

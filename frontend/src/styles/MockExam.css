@@ -1,25 +1,20 @@
 /* MockExam.css */
 
-/* Reset */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
 /* Container */
 .mock-exam-container {
   min-height: 100vh;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", sans-serif;
-  background: linear-gradient(to bottom right, #eff6ff, #e0f2fe, #fef3c7);
+  background: linear-gradient(to bottom right, var(--bg-gradient-light), var(--bg-gradient-dark));
   padding-bottom: 2rem;
+  color: var(--text-primary);
+  transition: background 0.3s ease, color 0.3s ease;
 }
 
 /* Header */
 .mock-header {
-  background: linear-gradient(135deg, #0ea5e9 0%, #8b5cf6 100%);
+  background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
   padding: 1.5rem;
-  box-shadow: 0 4px 20px rgba(14, 165, 233, 0.25);
+  box-shadow: 0 4px 20px var(--button-hover-shadow);
   border-radius: 1rem;
   margin: 1rem 2rem 2rem 2rem;
 }
@@ -68,34 +63,34 @@
   font-weight: 600;
   font-size: 0.9rem;
   cursor: pointer;
-  border: 2px solid #0ea5e9;
+  border: 2px solid var(--primary-color);
   background-color: transparent;
-  color: #0ea5e9;
+  color: var(--primary-color);
   transition: all 0.3s ease;
 }
 
 .nav-btn:hover {
-  background-color: #0ea5e9;
-  color: white;
+  background-color: var(--primary-color);
+  color: var(--text-inverted);
   transform: translateY(-3px);
-  box-shadow: 0 8px 20px rgba(14, 165, 233, 0.3);
+  box-shadow: 0 8px 20px var(--button-hover-shadow);
 }
 
 .nav-btn-active {
-  background-color: #0ea5e9;
-  color: white;
-  border-color: #0ea5e9;
-  box-shadow: 0 10px 25px rgba(14, 165, 233, 0.35);
+  background-color: var(--primary-color);
+  color: var(--text-inverted);
+  border-color: var(--primary-color);
+  box-shadow: 0 10px 25px var(--button-hover-shadow);
 }
 
 /* Main Content */
 .mock-main {
   max-width: 1000px;
   margin: 0 auto;
-  background: #ffffff;
+  background: var(--card-bg);
   border-radius: 1.5rem;
   padding: 2rem;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 10px 30px var(--card-shadow);
 }
 
 /* Exam Section */
@@ -111,7 +106,7 @@
   gap: 0.75rem;
   font-size: 1.5rem;
   font-weight: 700;
-  color: #1e293b;
+  color: var(--text-primary);
 }
 
 .section-title .icon {
@@ -120,46 +115,88 @@
 
 .section-description {
   font-size: 0.9rem;
-  color: #64748b;
+  color: var(--text-secondary);
 }
 
-/* Exam Buttons */
-.exam-buttons {
-  display: flex;
-  flex-wrap: wrap;
+/* Exam Grid */
+.exam-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
   gap: 1rem;
+  margin-top: 1rem;
 }
 
-.exam-btn {
-  flex: 1 1 calc(33% - 1rem);
-  background: #0ea5e9;
-  color: white;
-  padding: 0.85rem 1rem;
-  border: none;
-  border-radius: 1rem;
-  font-weight: 600;
+.exam-card {
+  background: var(--card-bg);
+  border-radius: 12px;
+  padding: 1rem;
+  border: 1px solid var(--border-color);
+  box-shadow: 0 8px 18px rgba(16,24,40,0.04);
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
   cursor: pointer;
+  transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
+}
+
+.exam-card.active {
+  transform: translateY(-6px);
+  box-shadow: 0 18px 36px rgba(2,6,23,0.08);
+  border-color: var(--primary-color);
+}
+
+.exam-card-head {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.exam-icon-large {
+  width: 44px;
+  height: 44px;
+  border-radius: 10px;
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 0.5rem;
-  transition: all 0.3s ease;
-  text-align: center;
+  background: linear-gradient(90deg,var(--primary-light),var(--primary-color));
+  color: white;
+  font-size: 1.25rem;
+  box-shadow: 0 6px 18px rgba(2,132,199,0.08);
 }
 
-.exam-btn:hover {
-  background: #2563eb;
-  transform: translateY(-3px);
-  box-shadow: 0 8px 20px rgba(14, 165, 233, 0.3);
+.exam-title { font-weight: 800; font-size: 1rem; }
+.exam-meta { font-size: 0.85rem; color: var(--text-secondary); }
+
+.exam-stats { margin-left: auto; display:flex; gap:0.5rem; align-items:center; }
+.last-score, .best-score { font-size:0.8rem; color:var(--text-secondary); background: transparent; padding: 4px 6px; border-radius:6px; }
+
+.exam-sample { font-size:0.9rem; color:var(--text-secondary); min-height:44px; }
+
+.exam-card-actions { display:flex; gap:0.5rem; justify-content:flex-end; }
+.btn-ghost { background: transparent; border:1px solid var(--border-color); padding:6px 10px; border-radius:8px; cursor:pointer; }
+.btn-primary { background:var(--primary-color); color:var(--text-inverted); padding:6px 10px; border-radius:8px; border:none; cursor:pointer; }
+
+/* Config Panel */
+.exam-config-panel { margin-top:1rem; display:flex; gap:1rem; align-items:flex-start; }
+.config-left { flex:1; background:var(--card-bg); padding:1rem; border-radius:12px; border:1px solid var(--border-color); }
+.config-right { width:320px; background:var(--card-bg); padding:1rem; border-radius:12px; border:1px solid var(--border-color); }
+.config-row { display:flex; justify-content:space-between; align-items:center; gap:0.75rem; margin-top:0.5rem; }
+.config-row input[type='number'], .config-row select { padding:6px 10px; border-radius:8px; border:1px solid var(--border-color); }
+.config-actions { display:flex; gap:0.5rem; margin-top:0.85rem; }
+.config-note { margin-top:0.75rem; color:var(--text-secondary); font-size:0.9rem; }
+.preview-card { background:var(--bg-secondary); padding:0.75rem; border-radius:8px; }
+
+/* Responsive */
+@media (max-width: 980px) {
+  .exam-grid { grid-template-columns: repeat(2, 1fr); }
+  .config-right { width: 100px; }
 }
 
-.exam-btn:active {
-  transform: translateY(0);
+@media (max-width: 640px) {
+  .exam-grid { grid-template-columns: 1fr; }
+  .exam-config-panel { flex-direction:column; }
 }
 
-.exam-icon {
-  font-size: 1rem;
-}
 
 /* Back Button */
 .back-btn-container {
@@ -170,8 +207,8 @@
 
 .back-btn {
   padding: 0.75rem 1.5rem;
-  background: #0ea5e9;
-  color: white;
+  background: var(--primary-color);
+  color: var(--text-inverted);
   border: none;
   border-radius: 0.75rem;
   font-weight: 600;
@@ -180,8 +217,88 @@
 }
 
 .back-btn:hover {
-  background: #2563eb;
+  background: var(--primary-dark);
   transform: translateY(-3px);
+}
+
+/* Exam Config & Quiz Wrapper */
+.quiz-wrapper {
+  margin-top: 1.25rem;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.exam-config {
+  width: 100%;
+  max-width: 720px;
+  margin: 1rem auto;
+  padding: 1rem 1.25rem;
+  background: var(--card-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 0.85rem;
+  box-shadow: 0 8px 24px var(--card-shadow);
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.exam-config h3 {
+  margin: 0;
+  font-size: 1.125rem;
+  color: var(--text-primary);
+}
+
+.exam-config p {
+  margin: 0;
+  color: var(--text-secondary);
+  font-size: 0.95rem;
+}
+
+.exam-config input[type="number"] {
+  width: 100px;
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  border: 1px solid var(--border-color);
+  background: transparent;
+  color: var(--text-primary);
+  font-weight: 600;
+}
+
+.config-buttons {
+  display: flex;
+  gap: 0.75rem;
+  margin-top: 0.5rem;
+}
+
+.start-btn {
+  background: var(--primary-color);
+  color: var(--text-inverted);
+  border: none;
+  padding: 0.6rem 1rem;
+  border-radius: 0.6rem;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 8px 20px var(--button-hover-shadow);
+  transition: transform 0.15s ease, background 0.15s ease;
+}
+
+.start-btn:hover {
+  transform: translateY(-3px);
+  background: var(--primary-dark);
+}
+
+.cancel-btn {
+  background: transparent;
+  border: 1px solid var(--border-color);
+  color: var(--text-primary);
+  padding: 0.6rem 1rem;
+  border-radius: 0.6rem;
+  cursor: pointer;
+}
+
+.cancel-btn:hover {
+  background: rgba(2,132,199,0.03);
 }
 
 /* Responsive Design */
@@ -192,5 +309,8 @@
   
   .exam-btn {
     flex: 1 1 100%;
+  }
+  .exam-config {
+    padding: 0.85rem;
   }
 }

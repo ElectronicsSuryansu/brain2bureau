@@ -1,8 +1,61 @@
 // Dashboard.jsx
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import "../styles/Dashboard.css";
+import Profile from "./Profile";
+import { studyMaterials } from "../data/studyMaterials";
 
-export default function Dashboard({ onNavigate }) {
+function uniqueDays(entries) {
+  const s = new Set();
+  entries.forEach(e => {
+    try { s.add(new Date(e.time).toDateString()); } catch(e) {}
+  });
+  return s.size;
+}
+
+export default function Dashboard({ onNavigate, toggleDarkMode }) {
+  const [resourceStates, setResourceStates] = useState(() => {
+    const raw = localStorage.getItem('resourceStates') || '{}';
+    try { return JSON.parse(raw); } catch(e) { return {}; }
+  });
+  const [exams, setExams] = useState(() => {
+    const raw = localStorage.getItem('examHistory') || '[]';
+    try { return JSON.parse(raw); } catch(e) { return []; }
+  });
+  const [activityLog, setActivityLog] = useState(() => {
+    const raw = localStorage.getItem('activityLog') || '[]';
+    try { return JSON.parse(raw); } catch(e) { return []; }
+  });
+
+  useEffect(() => {
+    const handler = (e) => {
+      if (!e) return;
+      if (e.key === 'resourceStates') setResourceStates(JSON.parse(localStorage.getItem('resourceStates') || '{}'));
+      if (e.key === 'examHistory') setExams(JSON.parse(localStorage.getItem('examHistory') || '[]'));
+      if (e.key === 'activityLog') setActivityLog(JSON.parse(localStorage.getItem('activityLog') || '[]'));
+    };
+    window.addEventListener('storage', handler);
+    window.addEventListener('resourceStatesChanged', () => setResourceStates(JSON.parse(localStorage.getItem('resourceStates') || '{}')));
+    window.addEventListener('activityLogChanged', () => setActivityLog(JSON.parse(localStorage.getItem('activityLog') || '[]')));
+    window.addEventListener('examHistoryChanged', () => setExams(JSON.parse(localStorage.getItem('examHistory') || '[]')));
+    const interval = setInterval(() => {
+      setResourceStates(JSON.parse(localStorage.getItem('resourceStates') || '{}'));
+      setExams(JSON.parse(localStorage.getItem('examHistory') || '[]'));
+      setActivityLog(JSON.parse(localStorage.getItem('activityLog') || '[]'));
+    }, 1500);
+    return () => { window.removeEventListener('storage', handler); window.removeEventListener('resourceStatesChanged', () => {}); window.removeEventListener('activityLogChanged', () => {}); window.removeEventListener('examHistoryChanged', () => {}); clearInterval(interval); };
+  }, []);
+
+  const resourcesRead = Object.values(resourceStates).filter(r => r.completed).length;
+  const examsTaken = exams.length;
+  const averageScore = examsTaken ? Math.round(exams.reduce((s,x) => s + (x.percentage||0),0) / examsTaken) : 0;
+  const studyDays = uniqueDays([...(activityLog || []), ...exams]);
+  const overallPercent = (() => {
+    const vals = Object.values(resourceStates);
+    if (!vals || !vals.length) return 0;
+    const sum = vals.reduce((s, r) => s + (r.progress || 0), 0);
+    return Math.round(sum / vals.length);
+  })();
+
   return (
     <div className="dashboard-container">
       {/* Header */}
@@ -15,6 +68,8 @@ export default function Dashboard({ onNavigate }) {
             <h1>Brain2Bureau - Loksewa Prep</h1>
             <p>Your Complete Preparation Companion</p>
           </div>
+          {/* Profile Component */}
+          <Profile onNavigate={onNavigate} toggleDarkMode={toggleDarkMode} />
         </div>
       </header>
 
@@ -56,22 +111,22 @@ export default function Dashboard({ onNavigate }) {
           {/* Stats Grid */}
           <div className="stats-grid">
             <div className="stat-card">
-              <div className="stat-number">8</div>
+              <div className="stat-number">{resourcesRead}</div>
               <div className="stat-label">Resources Read</div>
             </div>
 
             <div className="stat-card">
-              <div className="stat-number">5</div>
+              <div className="stat-number">{examsTaken}</div>
               <div className="stat-label">Exams Taken</div>
             </div>
 
             <div className="stat-card">
-              <div className="stat-number">78%</div>
+              <div className="stat-number">{averageScore}%</div>
               <div className="stat-label">Average Score</div>
             </div>
 
             <div className="stat-card">
-              <div className="stat-number">15</div>
+              <div className="stat-number">{studyDays}</div>
               <div className="stat-label">Study Days</div>
             </div>
           </div>
@@ -83,14 +138,14 @@ export default function Dashboard({ onNavigate }) {
 
           {/* Progress Bar */}
           <div className="progress-bar-container">
-            <div className="progress-bar-fill">
-              <span className="progress-text">65% Complete</span>
+            <div className="progress-bar-fill" style={{ width: `${overallPercent}%` }}>
+              <span className="progress-text">{overallPercent}% Complete</span>
             </div>
           </div>
 
           <p className="progress-message">Keep going! You're making great progress</p>
         </section>
-        <div><button className="back-btn" onClick={() => onNavigate && onNavigate("home")}>
+        <div><button className="back-btn" onClick={() => onNavigate && onNavigate("home") }>
           Back to Home
         </button></div>
       </main>

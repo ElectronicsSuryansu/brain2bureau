@@ -1,0 +1,11 @@
+/* News.css */
+.news-manager { padding:20px; max-width:900px; margin:0 auto; }
+.news-list-manager { margin-top:16px; display:flex; flex-direction:column; gap:12px; }
+.news-manager-item { display:flex; gap:12px; padding:12px; border-radius:8px; border:1px solid var(--border-color); background:var(--card-bg); }
+.news-edit input, .news-edit textarea { width:100%; padding:8px; border:1px solid var(--border-color); border-radius:8px; margin-top:6px; }
+.news-edit textarea { min-height:100px; }
+.news-title { font-weight:800; }
+.news-meta { font-size:12px; }
+.news-body { color:var(--text-primary); }
+.small-button { padding:8px 10px; border-radius:8px; background:transparent; border:1px solid var(--border-color); cursor:pointer; }
+.back-button { padding:8px 12px; border-radius:8px; background:transparent; border:1px solid var(--border-color); cursor:pointer; font-weight:700; }
